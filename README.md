@@ -1,6 +1,6 @@
 # huggingface_dl
 
-A donwload tool of huggingface in CLI.
+A donwload tool for huggingface in CLI.
 
 ## Installation
 
@@ -10,7 +10,7 @@ pip install git+https://github.com/p1atdev/huggingface_dl
 
 ## Usage
 
-**You have to login with `huggingface-cli` before use.**
+**You need to login by `huggingface-cli login` before use.**
 
 To download [Stability's Stable Diffusion v2.1 checkpoint](https://huggingface.co/stabilityai/stable-diffusion-2-1/blob/main/v2-1_768-ema-pruned.safetensors
 ):
