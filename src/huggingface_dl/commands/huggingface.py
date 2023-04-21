@@ -36,12 +36,12 @@ class HfCommands:
             type=str,
             help="The url of the file to list",
         )
+        ls_parser.set_defaults(func=lambda args: LsCommand(args))
 
 
 class DownloadCommand:
     def __init__(self, args):
         self.args = args
-        self.api = HfApi()
 
     def run(self):
         url = HfURLParser(self.args.url)
@@ -82,3 +82,24 @@ class DownloadCommand:
                 )
 
         print("Done!")
+
+
+class LsCommand:
+    def __init__(self, args):
+        self.args = args
+
+    def run(self):
+        url = HfURLParser(self.args.url)
+
+        files = get_all_files(
+            url.parsed_url["repo_id"],
+            url.parsed_url["repo_type"],
+            url.parsed_url["revision"],
+            url.parsed_url["file_path"],
+            url.parsed_url["is_folder"],
+        )
+
+        print(f"Found {len(files)} file(s) in {url.parsed_url['file_path']}")
+
+        for file in files:
+            print(f"- {file}")
