@@ -6,8 +6,8 @@ from huggingface_dl.commands.huggingface import HfCommands
 
 
 def main():
-    parser = ArgumentParser("huggingface-dl", usage="huggingface-dl <command> [<args>]")
-    commands_parser = parser.add_subparsers(help="huggingface-dl command helpers")
+    parser = ArgumentParser("hfdl", usage="hfdl <command> [<args>]")
+    commands_parser = parser.add_subparsers(help="hfdl command helpers")
 
     # Register commands
     HfCommands.register_command(commands_parser)

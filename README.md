@@ -16,35 +16,37 @@ To download [Stability's Stable Diffusion v2.1 checkpoint](https://huggingface.c
 ):
 
 ```bash
-huggingface-dl download "https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.safetensors"
+hfdl download "https://huggingface.co/stabilityai/stable-diffusion-2-1/resolve/main/v2-1_768-ema-pruned.safetensors"
 ```
 
-or
+or you can also use
 
 ```bash
-huggingface-dl download "https://huggingface.co/stabilityai/stable-diffusion-2-1/blob/main/v2-1_768-ema-pruned.safetensors"
+hfdl dl "https://huggingface.co/stabilityai/stable-diffusion-2-1/blob/main/v2-1_768-ema-pruned.safetensors"
 ```
 
 To download all ControlNet v1.1 models:
 
 ```bash
-huggingface-dl download "https://huggingface.co/lllyasviel/ControlNet-v1-1"
+hfdl download "https://huggingface.co/lllyasviel/ControlNet-v1-1"
 ```
 
 or
 
 ```bash
-huggingface-dl download "https://huggingface.co/lllyasviel/ControlNet-v1-1/tree/main"
+hfdl download "https://huggingface.co/lllyasviel/ControlNet-v1-1/tree/main"
 ```
 
 To specify output folder:
 
 ```bash
-huggingface-dl downlaod "https://huggingface.co/spaces/stabilityai/stable-diffusion" --output "./sd"
+hfdl downlaod "https://huggingface.co/spaces/stabilityai/stable-diffusion" --output "./sd"
 ```
 
 or
 
 ```bash
-huggingface-dl downlaod "https://huggingface.co/spaces/stabilityai/stable-diffusion" -o "./sd"
+hfdl dl "https://huggingface.co/spaces/stabilityai/stable-diffusion" -o "./sd"
 ```
+
+See `--help` for details. 

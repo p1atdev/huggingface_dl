@@ -33,6 +33,7 @@ def download_file(
         revision=revision,
         local_dir=out_dir,
         cache_dir=cache_dir,
+        local_dir_use_symlinks=False,
     )
 
 

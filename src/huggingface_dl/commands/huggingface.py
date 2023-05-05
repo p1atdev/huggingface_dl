@@ -1,5 +1,5 @@
 from argparse import _SubParsersAction
-from huggingface_hub.hf_api import HfApi
+from pathlib import Path
 
 from huggingface_dl.parser import HfURLParser
 from huggingface_dl.utils import (
@@ -14,7 +14,7 @@ class HfCommands:
     @staticmethod
     def register_command(parser: _SubParsersAction):
         download_parser = parser.add_parser(
-            "download", help="Download files from huggingface"
+            "download", aliases=["dl"], help="Download files from huggingface"
         )
         download_parser.add_argument(
             "url",
@@ -48,10 +48,14 @@ class DownloadCommand:
 
         output = self.args.output
         if output is None:
-            if url.parsed_url["file_path"] is not "":
-                output = url.parsed_url["file_path"].split("/")[-1]
+            output = Path("./").resolve()
+            if url.parsed_url["is_folder"] and url.parsed_url["file_path"] != "":
+                output = output / url.parsed_url["file_path"].split("/")[-1]
+            elif url.parsed_url["is_folder"] and url.parsed_url["file_path"] == "":
+                output = output / url.parsed_url["repo_id"].split("/")[-1]
             else:
-                output = url.parsed_url["repo_id"].split("/")[-1]
+                pass
+            output = str(output)
 
         files = get_all_files(
             url.parsed_url["repo_id"],
@@ -61,10 +65,12 @@ class DownloadCommand:
             url.parsed_url["is_folder"],
         )
 
-        print(f"Found {len(files)} file(s) in {url.parsed_url['file_path']}")
-
-        for file in files:
-            print(f"- {file}")
+        if url.parsed_url["is_folder"]:
+            print(f"Found {len(files)} file(s) in {url.parsed_url['file_path']}")
+            for file in files:
+                print(f"- {file}")
+        else:
+            print(f"Found 1 file {url.parsed_url['file_path']}")
 
         print(f"Downloading {len(files)} file(s) to {output}")
 
