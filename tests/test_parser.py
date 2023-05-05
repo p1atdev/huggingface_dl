@@ -43,7 +43,7 @@ class HfURLParserTest(unittest.TestCase):
 
     def test_datasets_repo_without_file_path(self):
         parsed = HfURLParser("https://huggingface.co/datasets/laion/laion-art")
-        self.assertEqual(parsed.parsed_url["repo_type"], "datasets")
+        self.assertEqual(parsed.parsed_url["repo_type"], "dataset")
         self.assertEqual(parsed.parsed_url["repo_id"], "laion/laion-art")
         self.assertEqual(parsed.parsed_url["revision"], None)
         self.assertEqual(parsed.parsed_url["file_path"], "")
@@ -53,7 +53,7 @@ class HfURLParserTest(unittest.TestCase):
         parsed = HfURLParser(
             "https://huggingface.co/datasets/laion/laion400m_new/blob/main/0000.parquet"
         )
-        self.assertEqual(parsed.parsed_url["repo_type"], "datasets")
+        self.assertEqual(parsed.parsed_url["repo_type"], "dataset")
         self.assertEqual(parsed.parsed_url["repo_id"], "laion/laion400m_new")
         self.assertEqual(parsed.parsed_url["revision"], "main")
         self.assertEqual(parsed.parsed_url["file_path"], "0000.parquet")
@@ -61,7 +61,7 @@ class HfURLParserTest(unittest.TestCase):
 
     def test_spaces_repo_without_file_path(self):
         parsed = HfURLParser("https://huggingface.co/spaces/Salesforce/BLIP2")
-        self.assertEqual(parsed.parsed_url["repo_type"], "spaces")
+        self.assertEqual(parsed.parsed_url["repo_type"], "space")
         self.assertEqual(parsed.parsed_url["repo_id"], "Salesforce/BLIP2")
         self.assertEqual(parsed.parsed_url["revision"], None)
         self.assertEqual(parsed.parsed_url["file_path"], "")
