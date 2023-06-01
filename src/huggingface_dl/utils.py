@@ -1,6 +1,7 @@
 from pathlib import Path
 import tempfile
 import os
+from typing import List, Optional
 from contextlib import contextmanager
 from huggingface_hub import hf_api, hf_hub_download
 
@@ -24,7 +25,7 @@ def download_file(
     revision: str,
     file_path: str,
     out_dir: str,
-    cache_dir: str = None,
+    cache_dir: Optional[str] = None,
 ):
     hf_hub_download(
         repo_id=repo_id,
@@ -38,16 +39,16 @@ def download_file(
 
 
 def get_drive(path: str):
-    path = Path(path).resolve()
-    drive = path.drive
-    root = path.root
+    resolved_path = Path(path).resolve()
+    drive = resolved_path.drive
+    root = resolved_path.root
     return drive + root
 
 
 @contextmanager
 def custom_drive_cache_dir(drive: str):
-    drive = Path(drive)
-    base_dir = Path(drive) / "tmp"
+    resolved_drive = Path(drive)
+    base_dir = resolved_drive / "tmp"
     if not base_dir.exists():
         os.makedirs(base_dir)
     print(f"Using {base_dir.resolve()} as cache dir")

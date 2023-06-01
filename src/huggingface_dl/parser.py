@@ -18,7 +18,7 @@ class HfURLParser:
 
         repo_type = "model"
         if path_parts[0] in ["datasets", "spaces"]:
-            repo_type = path_parts.pop(0)[:-1]
+            repo_type = path_parts.pop(0)[:-1]  # remove last "s"
 
         repo_id = "/".join(path_parts[:2])
         path_parts = path_parts[2:]
