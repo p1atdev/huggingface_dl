@@ -59,6 +59,16 @@ class HfURLParserTest(unittest.TestCase):
         self.assertEqual(parsed.parsed_url["file_path"], "0000.parquet")
         self.assertEqual(parsed.parsed_url["is_folder"], False)
 
+    def test_datasets_repo_with_file_path(self):
+        parsed = HfURLParser(
+            "https://huggingface.co/datasets/hogehoge/My-Dataset/tree/main/v1"
+        )
+        self.assertEqual(parsed.parsed_url["repo_type"], "dataset")
+        self.assertEqual(parsed.parsed_url["repo_id"], "hogehoge/My-Dataset")
+        self.assertEqual(parsed.parsed_url["revision"], "main")
+        self.assertEqual(parsed.parsed_url["file_path"], "v1")
+        self.assertEqual(parsed.parsed_url["is_folder"], True)
+
     def test_spaces_repo_without_file_path(self):
         parsed = HfURLParser("https://huggingface.co/spaces/Salesforce/BLIP2")
         self.assertEqual(parsed.parsed_url["repo_type"], "space")

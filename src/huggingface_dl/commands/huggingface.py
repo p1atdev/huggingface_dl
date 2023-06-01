@@ -49,9 +49,7 @@ class DownloadCommand:
         output = self.args.output
         if output is None:
             output = Path("./").resolve()
-            if url.parsed_url["is_folder"] and url.parsed_url["file_path"] != "":
-                output = output / url.parsed_url["file_path"].split("/")[-1]
-            elif url.parsed_url["is_folder"] and url.parsed_url["file_path"] == "":
+            if url.parsed_url["is_folder"] and url.parsed_url["file_path"] == "":
                 output = output / url.parsed_url["repo_id"].split("/")[-1]
             else:
                 pass
